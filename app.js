@@ -107,6 +107,9 @@ ${teamBName}
 `
 
     document.getElementById("playerForm").addEventListener("submit", e => {
+        if (teamA.length === 5 || teamB.length === 5) {
+            alert("Your team is already full");
+        }
 
         e.preventDefault()
         const username = document.getElementById("username").value
