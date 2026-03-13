@@ -14,11 +14,19 @@ nav a {
     margin-top: 20px;
 }
 
-.team {
+.team  {
     background: white;
     padding: 20px;
     border-radius: 10px;
     width: 250px;
+}
+
+.statistics  {
+    margin-top: 10px;
+    background: white;
+    width: 620px;
+    height: 250px;
+    border-radius: 10px;
 }
 
 .player {
