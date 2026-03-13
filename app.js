@@ -115,6 +115,7 @@ ${teamBName}
         const username = document.getElementById("username").value
         if (usernameExists) {
             document.getElementById("error").textContent = "Username already exists"
+            return;
         }
         const player = {
             username,
