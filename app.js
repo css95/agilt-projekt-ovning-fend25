@@ -4,6 +4,9 @@ let teamB = JSON.parse(localStorage.getItem("teamB")) || []
 let teamAName = localStorage.getItem("teamAName") || "Team A"
 let teamBName = localStorage.getItem("teamBName") || "Team B"
 
+const statsBtn = document.getElementById("stats")
+
+
 
 function save() {
 
@@ -161,3 +164,13 @@ function renderPlayerInfo() {
         </div>
     `;
 }
+
+function getStats() {
+    console.log("You clicked statsBtn");
+    let players = teamA.length;
+    console.log({players});
+    
+
+}
+
+statsBtn.addEventListener("click", getStats)

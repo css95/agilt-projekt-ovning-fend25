@@ -106,5 +106,9 @@ function changeTeamName() {
     teamNameInput.value = ""
 }
 
+
+
+
 addPlayerBtn.addEventListener("click", addPlayer)
 changeNameBtn.addEventListener("click", changeTeamName)
+
