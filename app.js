@@ -97,15 +97,15 @@ function renderAddPlayer() {
 
     teamSelect.innerHTML = `
 
-<option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
-${teamAName}
-</option>
+        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        ${teamAName}
+        </option>
 
-<option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
-${teamBName}
-</option>
+        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        ${teamBName}
+        </option>
 
-`
+    `
 
     document.getElementById("playerForm").addEventListener("submit", e => {
         if (teamA.length === 5 || teamB.length === 5) {
