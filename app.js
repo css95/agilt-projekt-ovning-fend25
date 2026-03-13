@@ -112,6 +112,7 @@ ${teamBName}
         const username = document.getElementById("username").value
         if (usernameExists) {
             document.getElementById("error").textContent = "Username already exists"
+            return;
         }
         const player = {
             username,
@@ -151,8 +152,8 @@ function renderPlayerInfo() {
 <p><b>Age:</b> ${player?.age}</p>
 <p><b>Country:</b> ${player?.country}</p>
 <p><b>Ranking:</b> ${player?.ranking}</p>
-<br>
-<button onclick="window.location='home.html'">
+<br>    
+<button onclick="window.location='index.html'">
 Back
 </button>
 
