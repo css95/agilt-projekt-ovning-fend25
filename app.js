@@ -116,7 +116,7 @@ function renderAddPlayer() {
         const username = document.getElementById("username").value
         if (usernameExists) {
             document.getElementById("error").textContent = "Username already exists"
-            return;
+            // return;
         }
         const player = {
             username,
