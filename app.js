@@ -183,3 +183,14 @@ function changeTeam(team, index) {
     renderHome()
 }
 
+function searchPlayer() {
+    const searchInput = document.getElementById('search');
+    const playerSearch = searchInput.value;
+    const searchedPlayer = teamA.find(p => p.username === playerSearch) || teamB.find(p => p.username === playerSearch);
+
+    if(searchedPlayer) {
+        goToPlayer(searchedPlayer.username)
+    } else {
+        alert ("No player found")
+    }
+}
