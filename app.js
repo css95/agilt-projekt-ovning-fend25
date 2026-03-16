@@ -165,12 +165,37 @@ function renderPlayerInfo() {
     `;
 }
 
-function getStats() {
-    console.log("You clicked statsBtn");
-    let players = teamA.length;
-    console.log({players});
-    
+function getTotalAge(team) {
+    let totalAge = 0;
 
+    team.forEach(player => {
+        totalAge += Number(player.age);
+    });
+
+    return totalAge;
+}
+
+function getStats() {
+
+    const teamA = JSON.parse(localStorage.getItem("teamA")) || [];
+    const teamB = JSON.parse(localStorage.getItem("teamB")) || [];
+
+    let totalAgeTeamA = getTotalAge(teamA);
+    let totalAgeTeamB = getTotalAge(teamB);
+
+    let averageAgeTeamA = totalAgeTeamA / teamA.length;
+    let averageAgeTeamB = totalAgeTeamB / teamB.length;
+    
+    const statistics = document.querySelector(".statistics");
+    statistics.innerHTML = `
+        <div class="statistics">
+            <h2>Statistics</h2>
+            <p>Players Team A: ${teamA.length}</p>
+            <p>Average age Team A: ${averageAgeTeamA}</p>
+            <p>Players Team B: ${teamB.length}</p>
+            <p>Average age Team B: ${averageAgeTeamB}</p>
+        </div>
+    `;
 }
 
 statsBtn.addEventListener("click", getStats)
