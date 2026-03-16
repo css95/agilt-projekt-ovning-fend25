@@ -189,8 +189,8 @@ function searchPlayer() {
     const searchedPlayer = teamA.find(p => p.username === playerSearch) || teamB.find(p => p.username === playerSearch);
 
     if(searchedPlayer) {
-        goToPlayer(searchedPlayer.username)
+        goToPlayer(searchedPlayer.username);
     } else {
-        alert ("No player found")
+        alert ("No player found");
     }
 }
