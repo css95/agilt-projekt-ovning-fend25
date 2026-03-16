@@ -1,15 +1,30 @@
 body {
+    margin: 0;
     font-family: Arial;
-    background: #f4f4f4;
-    padding: 30px;
+    background: #051252;
+}
+
+nav {
+    background-color: #051252;
+    padding: 25px;
+
 }
 
 nav a {
-    margin-right: 15px;
+    margin: 40px;
+    color: white;
+    text-decoration: none;
 }
 
-.teams {
+H1 {
+    color: white;
+    text-align: center;
+    font-size: 64px;
+}
+
+.teams, .rename {
     display: flex;
+    justify-content: center;
     gap: 40px;
     margin-top: 20px;
 }
