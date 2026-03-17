@@ -12,24 +12,26 @@
         <a href="addplayer.html">Add Player</a>
     </nav>
     <h1>Add Player</h1>
-    <form id="playerForm">
-        <input id="username" placeholder="Username" required>
-        <input id="firstname" placeholder="First name" required>
-        <input id="lastname" placeholder="Last name" required>
-        <input id="age" type="number" placeholder="Age" required>
-        <input id="country" placeholder="Country" required>
-        <select id="ranking">
-            <option>Iron</option>
-            <option>Bronze</option>
-            <option>Silver</option>
-            <option>Gold</option>
-            <option>Diamond</option>
-        </select>
-        <br><br>
-        <select id="teamSelect"></select>
-        <br><br>
-        <button>Add Player</button>
-    </form>
+    <div class="form">
+        <form id="playerForm">
+            <input id="username" placeholder="Username" required>
+            <input id="firstname" placeholder="First name" required>
+            <input id="lastname" placeholder="Last name" required>
+            <input id="age" type="number" placeholder="Age" required>
+            <input id="country" placeholder="Country" required>
+            <select id="ranking">
+                <option>Iron</option>
+                <option>Bronze</option>
+                <option>Silver</option>
+                <option>Gold</option>
+                <option>Diamond</option>
+            </select>
+            <br><br>
+            <select id="teamSelect"></select>
+            <br><br>
+            <button>Add Player</button>
+        </form>
+    </div>
     <p id="error"></p>
     
     <script>

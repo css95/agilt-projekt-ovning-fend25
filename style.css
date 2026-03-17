@@ -19,13 +19,18 @@ body {
 nav {
     background-color: #051252;
     padding: 25px;
-
 }
 
 nav a {
     margin: 40px;
     color: white;
     text-decoration: none;
+}
+
+nav a:hover {
+    background-color:#e04e55;
+    padding: 10px;
+    border-radius: 50%;
 }
 
 H1 {
@@ -42,6 +47,19 @@ H1 {
     margin-top: 20px;
 }
 
+.form {
+    display: flex;
+    justify-content: center;
+}
+
+#playerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    width: 399px;
+}
+
 .team {
     padding: 20px;
     border-radius: 10px;
@@ -54,6 +72,7 @@ H1 {
     display: flex;
     justify-content: space-between;
     margin: 6px 0;
+
 }
 
 .player span {
@@ -70,6 +89,15 @@ H1 {
 
 button {
     background-color: #5C9CFA;
+    color: white;
     width: 100px;
     height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color:#051252;
+    cursor: pointer;
+
 }
