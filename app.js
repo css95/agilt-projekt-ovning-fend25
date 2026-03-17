@@ -4,6 +4,9 @@ let teamB = JSON.parse(localStorage.getItem("teamB")) || []
 let teamAName = localStorage.getItem("teamAName") || "Team A"
 let teamBName = localStorage.getItem("teamBName") || "Team B"
 
+const statsBtn = document.getElementById("stats")
+
+
 
 function save() {
 
@@ -75,10 +78,10 @@ function goToPlayer(username) {
 
 function removePlayer(team, username) {
     if (team === "A") {
-        teamA.filter(p => p.username !== username)
+        teamA = teamA.filter(p => p.username !== username);
     }
     if (team === "B") {
-        teamB.filter(p => p.username !== username)
+        teamB = teamB.filter(p => p.username !== username);
     }
     save()
     renderHome()
@@ -106,7 +109,10 @@ ${teamBName}
 
 `
 
-    document.getElementById("playerForm").addEventListener("submit", e => {
+    document.getElementById("playerForm").addEventListgitener("submit", e => {
+        if (teamA.length === 5 || teamB.length === 5) {
+            alert("Your team is already full");
+        }
 
         e.preventDefault()
         const username = document.getElementById("username").value
@@ -117,9 +123,9 @@ ${teamBName}
             username,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
-            age: document.getElementById("age"),
+            age: document.getElementById("age").value,
             country: document.getElementById("country").value,
-            ranking: document.getElementById("ranking")
+            ranking: document.getElementById("ranking").value
 
         }
         const team = document.getElementById("teamSelect").value
@@ -138,26 +144,58 @@ ${teamBName}
 
 function renderPlayerInfo() {
 
-    const username = localStorage.getItem("selectedPlayer")
+    const username = localStorage.getItem("selectedPlayer");
 
-    const player = teamA.find(p => p.username === username)
+    const player = teamA.find(p => p.username === username) || teamB.find(p => p.username === username);
 
-    const profile = document.getElementById("profile")
+    const profile = document.getElementById("profile");
 
     profile.innerHTML = `
-<div class="profile">
-<h2>${player?.username}</h2>
-<p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
-<p><b>Age:</b> ${player?.age}</p>
-<p><b>Country:</b> ${player?.country}</p>
-<p><b>Ranking:</b> ${player?.ranking}</p>
-<br>
-<button onclick="window.location='home.html'">
-Back
-</button>
-
-</div>
-
-`
-
+        <div class="profile">
+            <h2>${player?.username}</h2>
+            <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
+            <p><b>Age:</b> ${player?.age}</p>
+            <p><b>Country:</b> ${player?.country}</p>
+            <p><b>Ranking:</b> ${player?.ranking}</p>
+            <br>
+            <button onclick="window.location='index.html'">
+            Back
+            </button>
+        </div>
+    `;
 }
+
+function getTotalAge(team) {
+    let totalAge = 0;
+
+    team.forEach(player => {
+        totalAge += Number(player.age);
+    });
+
+    return totalAge;
+}
+
+function getStats() {
+
+    const teamA = JSON.parse(localStorage.getItem("teamA")) || [];
+    const teamB = JSON.parse(localStorage.getItem("teamB")) || [];
+
+    let totalAgeTeamA = getTotalAge(teamA);
+    let totalAgeTeamB = getTotalAge(teamB);
+
+    let averageAgeTeamA = totalAgeTeamA / teamA.length;
+    let averageAgeTeamB = totalAgeTeamB / teamB.length;
+    
+    const statistics = document.querySelector(".statistics");
+    statistics.innerHTML = `
+        <div class="statistics">
+            <h2>Statistics</h2>
+            <p>Players Team A: ${teamA.length}</p>
+            <p>Average age Team A: ${averageAgeTeamA}</p>
+            <p>Players Team B: ${teamB.length}</p>
+            <p>Average age Team B: ${averageAgeTeamB}</p>
+        </div>
+    `;
+}
+
+statsBtn.addEventListener("click", getStats)
