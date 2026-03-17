@@ -90,9 +90,8 @@ function removePlayer(team, username) {
 }
 
 function usernameExists(username) {
-    return teamA.includes(username) || teamB.includes(username)
+    return teamA.some(p => p.username === username) ||  teamB.some(p => p.username === username)
 }
-
 
 function renderAddPlayer() {
 
@@ -117,7 +116,7 @@ function renderAddPlayer() {
 
         e.preventDefault()
         const username = document.getElementById("username").value
-        if (usernameExists) {
+        if (usernameExists(username)) {
             document.getElementById("error").textContent = "Username already exists"
             // return;
         }
