@@ -1,7 +1,19 @@
+
+.noto-emoji-esport {
+  font-family: "Noto Emoji", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+html {
+    background-image: linear-gradient(to bottom, #4962da, #5663d3, #6165cb, #6966c4, #6f68bd, #8165b8, #9162b2, #9e60ab, #b8579d, #cd4e89, #da4a70, #e04e55);
+}
+
+
 body {
     margin: 0;
-    font-family: Arial;
-    background: #051252;
+    height: 100vh;
 }
 
 nav {
@@ -22,6 +34,7 @@ H1 {
     font-size: 64px;
 }
 
+
 .teams, .rename {
     display: flex;
     justify-content: center;
@@ -30,10 +43,11 @@ H1 {
 }
 
 .team {
-    background: white;
     padding: 20px;
     border-radius: 10px;
-    width: 250px;
+    width: 350px;
+    background-color: #051252;
+    color: white;
 }
 
 .player {
@@ -44,7 +58,7 @@ H1 {
 
 .player span {
     cursor: pointer;
-    color: blue;
+    color: white;
 }
 
 .profile {
@@ -52,4 +66,10 @@ H1 {
     padding: 30px;
     border-radius: 10px;
     width: 300px;
+}
+
+button {
+    background-color: #5C9CFA;
+    width: 100px;
+    height: 30px;
 }
