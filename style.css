@@ -63,7 +63,7 @@ H1 {
 .team {
     padding: 20px;
     border-radius: 10px;
-    width: 350px;
+    width: 400px;
     background-color: #051252;
     color: white;
 }
@@ -92,12 +92,18 @@ button {
     color: white;
     width: 100px;
     height: 30px;
+    margin-left: 5px;
     border: none;
     border-radius: 5px;
 }
 
+
+span {
+    margin-top: 5px;
+}
+
 button:hover {
-    background-color:#051252;
+    background-color:#e04e55;
     cursor: pointer;
 
 }
