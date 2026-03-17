@@ -41,30 +41,31 @@ function renderHome() {
     const listB = document.getElementById("teamBList")
     listA.innerHTML = ""
     listB.innerHTML = ""
-    teamA.forEach(p => {
+    teamA.forEach((p, index) => {
         const li = document.createElement("li")
         li.className = "player"
         li.innerHTML = `
 
-<span onclick="goToPlayer('${p.username}')">${p.username}</span>
+            <span onclick="goToPlayer('${p.username}')">${p.username}</span>
 
-<button onclick="removePlayer('A','${p.username}')">
-Remove
-</button>
+            <button onclick="removePlayer('A','${p.username}')">Remove</button>
 
-`
+            <button onclick="changeTeam('A','${index}')">Change Team</button>
+        `
         listA.appendChild(li)
     })
-    teamB.forEach(p => {
+    teamB.forEach((p, index) => {
         const li = document.createElement("li")
         li.className = "player"
         li.innerHTML = `
-<span onclick="goToPlayer('${p.username}')">${p.username}</span>
-<button onclick="removePlayer('B','${p.username}')">
-Remove
-</button>
 
-`
+            <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+
+            <button onclick="removePlayer('B','${p.username}')">Remove</button>
+
+            <button onclick="changeTeam('B','${index}')">Change Team</button>
+
+        `
         listB.appendChild(li)
     })
 
@@ -99,17 +100,17 @@ function renderAddPlayer() {
 
     teamSelect.innerHTML = `
 
-<option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
-${teamAName}
-</option>
+        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        ${teamAName}
+        </option>
 
-<option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
-${teamBName}
-</option>
+        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        ${teamBName}
+        </option>
 
-`
+    `
 
-    document.getElementById("playerForm").addEventListgitener("submit", e => {
+    document.getElementById("playerForm").addEventListener("submit", e => {
         if (teamA.length === 5 || teamB.length === 5) {
             alert("Your team is already full");
         }
@@ -118,6 +119,7 @@ ${teamBName}
         const username = document.getElementById("username").value
         if (usernameExists) {
             document.getElementById("error").textContent = "Username already exists"
+            return;
         }
         const player = {
             username,
@@ -165,37 +167,22 @@ function renderPlayerInfo() {
     `;
 }
 
-function getTotalAge(team) {
-    let totalAge = 0;
-
-    team.forEach(player => {
-        totalAge += Number(player.age);
-    });
-
-    return totalAge;
+function changeTeam(team, index) {
+    if (team === "A") {
+        if (teamB.length >= 5) {
+            alert("Team B is full")
+            return
+        }
+        const player = teamA.splice(parseInt(index), 1)[0]
+        teamB.push(player)
+    } else {
+        if (teamA.length >= 5) {
+            alert("Team A is full")
+            return
+        }
+        const player = teamB.splice(parseInt(index), 1)[0]
+        teamA.push(player)
+    }
+    renderHome()
 }
 
-function getStats() {
-
-    const teamA = JSON.parse(localStorage.getItem("teamA")) || [];
-    const teamB = JSON.parse(localStorage.getItem("teamB")) || [];
-
-    let totalAgeTeamA = getTotalAge(teamA);
-    let totalAgeTeamB = getTotalAge(teamB);
-
-    let averageAgeTeamA = totalAgeTeamA / teamA.length;
-    let averageAgeTeamB = totalAgeTeamB / teamB.length;
-    
-    const statistics = document.querySelector(".statistics");
-    statistics.innerHTML = `
-        <div class="statistics">
-            <h2>Statistics</h2>
-            <p>Players Team A: ${teamA.length}</p>
-            <p>Average age Team A: ${averageAgeTeamA}</p>
-            <p>Players Team B: ${teamB.length}</p>
-            <p>Average age Team B: ${averageAgeTeamB}</p>
-        </div>
-    `;
-}
-
-statsBtn.addEventListener("click", getStats)
