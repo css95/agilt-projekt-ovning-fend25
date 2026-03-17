@@ -44,12 +44,12 @@ function renderHome() {
         li.innerHTML = `
 
 <span onclick="goToPlayer('${p.username}')">${p.username}</span>
-
+<button onclick="editPlayer('${p.username}')">Edit</button>
 <button onclick="removePlayer('A','${p.username}')">
 Remove
 </button>
-
 `
+
         listA.appendChild(li)
     })
     teamB.forEach(p => {
@@ -57,15 +57,20 @@ Remove
         li.className = "player"
         li.innerHTML = `
 <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+<button onclick="editPlayer('${p.username}')">Edit</button>
 <button onclick="removePlayer('B','${p.username}')">
-Remove
-</button>
+Remove  
+</button>`
 
-`
         listB.appendChild(li)
     })
-
 }
+
+function editPlayer(username) {
+    localStorage.setItem("editPlayer", username)
+    window.location.href = "addplayer.html"
+}
+
 
 
 function goToPlayer(username) {
