@@ -4,6 +4,9 @@ let teamB = JSON.parse(localStorage.getItem("teamB")) || []
 let teamAName = localStorage.getItem("teamAName") || "Team A"
 let teamBName = localStorage.getItem("teamBName") || "Team B"
 
+const statsBtn = document.getElementById("stats")
+
+
 
 function save() {
 
@@ -38,30 +41,31 @@ function renderHome() {
     const listB = document.getElementById("teamBList")
     listA.innerHTML = ""
     listB.innerHTML = ""
-    teamA.forEach(p => {
+    teamA.forEach((p, index) => {
         const li = document.createElement("li")
         li.className = "player"
         li.innerHTML = `
 
-<span onclick="goToPlayer('${p.username}')">${p.username}</span>
+            <span onclick="goToPlayer('${p.username}')">${p.username}</span>
 
-<button onclick="removePlayer('A','${p.username}')">
-Remove
-</button>
+            <button onclick="removePlayer('A','${p.username}')">Remove</button>
 
-`
+            <button onclick="changeTeam('A','${index}')">Change Team</button>
+        `
         listA.appendChild(li)
     })
-    teamB.forEach(p => {
+    teamB.forEach((p, index) => {
         const li = document.createElement("li")
         li.className = "player"
         li.innerHTML = `
-<span onclick="goToPlayer('${p.username}')">${p.username}</span>
-<button onclick="removePlayer('B','${p.username}')">
-Remove
-</button>
 
-`
+            <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+
+            <button onclick="removePlayer('B','${p.username}')">Remove</button>
+
+            <button onclick="changeTeam('B','${index}')">Change Team</button>
+
+        `
         listB.appendChild(li)
     })
 
@@ -75,10 +79,10 @@ function goToPlayer(username) {
 
 function removePlayer(team, username) {
     if (team === "A") {
-        teamA.filter(p => p.username !== username)
+        teamA = teamA.filter(p => p.username !== username);
     }
     if (team === "B") {
-        teamB.filter(p => p.username !== username)
+        teamB = teamB.filter(p => p.username !== username);
     }
     save()
     renderHome()
@@ -86,9 +90,8 @@ function removePlayer(team, username) {
 }
 
 function usernameExists(username) {
-    return teamA.includes(username) || teamB.includes(username)
+    return teamA.some(p => p.username === username) ||  teamB.some(p => p.username === username)
 }
-
 
 function renderAddPlayer() {
 
@@ -96,30 +99,34 @@ function renderAddPlayer() {
 
     teamSelect.innerHTML = `
 
-<option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
-${teamAName}
-</option>
+        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        ${teamAName}
+        </option>
 
-<option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
-${teamBName}
-</option>
+        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        ${teamBName}
+        </option>
 
-`
+    `
 
     document.getElementById("playerForm").addEventListener("submit", e => {
+        if (teamA.length === 5 || teamB.length === 5) {
+            alert("Your team is already full");
+        }
 
         e.preventDefault()
         const username = document.getElementById("username").value
-        if (usernameExists) {
+        if (usernameExists(username)) {
             document.getElementById("error").textContent = "Username already exists"
+            // return;
         }
         const player = {
             username,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
-            age: document.getElementById("age"),
+            age: document.getElementById("age").value,
             country: document.getElementById("country").value,
-            ranking: document.getElementById("ranking")
+            ranking: document.getElementById("ranking").value
 
         }
         const team = document.getElementById("teamSelect").value
@@ -138,26 +145,54 @@ ${teamBName}
 
 function renderPlayerInfo() {
 
-    const username = localStorage.getItem("selectedPlayer")
+    const username = localStorage.getItem("selectedPlayer");
 
-    const player = teamA.find(p => p.username === username)
+    const player = teamA.find(p => p.username === username) || teamB.find(p => p.username === username);
 
-    const profile = document.getElementById("profile")
+    const profile = document.getElementById("profile");
 
     profile.innerHTML = `
-<div class="profile">
-<h2>${player?.username}</h2>
-<p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
-<p><b>Age:</b> ${player?.age}</p>
-<p><b>Country:</b> ${player?.country}</p>
-<p><b>Ranking:</b> ${player?.ranking}</p>
-<br>
-<button onclick="window.location='home.html'">
-Back
-</button>
+        <div class="profile">
+            <h2>${player?.username}</h2>
+            <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
+            <p><b>Age:</b> ${player?.age}</p>
+            <p><b>Country:</b> ${player?.country}</p>
+            <p><b>Ranking:</b> ${player?.ranking}</p>
+            <br>
+            <button onclick="window.location='index.html'">
+            Back
+            </button>
+        </div>
+    `;
+}
 
-</div>
+function changeTeam(team, index) {
+    if (team === "A") {
+        if (teamB.length >= 5) {
+            alert("Team B is full")
+            return
+        }
+        const player = teamA.splice(parseInt(index), 1)[0]
+        teamB.push(player)
+    } else {
+        if (teamA.length >= 5) {
+            alert("Team A is full")
+            return
+        }
+        const player = teamB.splice(parseInt(index), 1)[0]
+        teamA.push(player)
+    }
+    renderHome()
+}
 
-`
+function searchPlayer() {
+    const searchInput = document.getElementById('search');
+    const playerSearch = searchInput.value;
+    const searchedPlayer = teamA.find(p => p.username === playerSearch) || teamB.find(p => p.username === playerSearch);
 
+    if(searchedPlayer) {
+        goToPlayer(searchedPlayer.username);
+    } else {
+        alert ("No player found");
+    }
 }
