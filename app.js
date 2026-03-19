@@ -197,7 +197,7 @@ function searchPlayer() {
     }
 }
 
-static async getCountries() {
+async function getCountries() {
     try {
         const response = await fetch('https://restcountries.com/v3.1/region/europe');
         const data = await response.json();
