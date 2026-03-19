@@ -197,7 +197,7 @@ function searchPlayer() {
     }
 }
 
-static async getCountry() {
+static async getCountries() {
     try {
         const response = await fetch('https://restcountries.com/v3.1/region/europe');
         const data = await response.json();
@@ -205,6 +205,7 @@ static async getCountry() {
         return data.map(country => country.name.common).sort();
     } catch (err) {
         console.error('Could not fetch country:', err);
+        alert("Couldn't fetch countries")
         return [];
     }
 }
