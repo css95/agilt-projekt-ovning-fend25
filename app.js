@@ -94,7 +94,7 @@ function usernameExists(username) {
 }
 
 function renderAddPlayer() {
-
+    addCountriesToDropdown();
     const teamSelect = document.getElementById("teamSelect")
 
     teamSelect.innerHTML = `
@@ -207,5 +207,17 @@ async function getCountries() {
         console.error('Could not fetch country:', err);
         alert("Couldn't fetch countries")
         return [];
+    }
+}
+
+async function addCountriesToDropdown() {
+    const countriesDropdown = document.getElementById('country');
+
+    const countries = await getCountries();
+
+    for (let i = 0; i < countries.length; i++) {
+        const countryElement = document.createElement('option');
+        countryElement.textContent = countries[i];
+        countriesDropdown.appendChild(countryElement);
     }
 }
