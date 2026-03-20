@@ -46,6 +46,7 @@ H1 {
     color: white;
     text-align: center;
     font-size: 64px;
+    width: 100%;
     }
 h2 {
     font-size: 48px;
@@ -59,17 +60,22 @@ h2 {
     flex-direction: column;
     gap: 40px;
     margin-top: 20px;
-    padding: 0 16 px;
+    padding: 0 16px;
     }
 
 
 .rename {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-input, select {
+.renameTeam {
+    display: flex;
+    align-items: center;
+}
+
+input, select, span {
     background: #020617;
     color: whitesmoke;
     width: 100%;
@@ -80,6 +86,8 @@ input, select {
     font-size: 16px;
     outline: none;
     transition: all 0.2s ease;
+    box-sizing: border-box;
+    height: 44px;
  }
 
 .form {
@@ -146,20 +154,14 @@ button:active {
 
 /*tablet iPad mini*/
 @media (min-width: 768px){
-    body {
-        background-color: #8165b8;
-    }
+
+
 
 }
 
 /*tablet iPad Pro*/
 @media (min-width: 1024px) {
 
-
-    .teams {
-        flex-direction: row;
-        align-items: flex-start;
-    }
 
 /*
     button {
