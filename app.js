@@ -48,8 +48,6 @@ function renderHome() {
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
 
-            <span>${p.country}</span>
-
             <button onclick="removePlayer('A','${p.username}')">Remove</button>
 
             <button onclick="changeTeam('A','${index}')">Change Team</button>
@@ -127,10 +125,11 @@ function renderAddPlayer() {
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             age: document.getElementById("age").value,
-            country: document.getElementById("country").value,
+            country: document.getElementById("country").selectedOptions[0].dataset.name,
+            flag: document.getElementById("country").selectedOptions[0].dataset.flag,
             ranking: document.getElementById("ranking").value
-
         }
+
         const team = document.getElementById("teamSelect").value
         if (team === "A") {
             teamA.push(player)
@@ -220,6 +219,8 @@ async function addCountriesToDropdown() {
     for (let i = 0; i < countries.length; i++) {
         const countryElement = document.createElement('option');
         countryElement.textContent = countries[i].flag + ' ' + countries[i].name;
+        countryElement.dataset.name = countries[i].name;
+        countryElement.dataset.flag = countries[i].flag;
         countriesDropdown.appendChild(countryElement);
     }
 }
