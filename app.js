@@ -94,7 +94,7 @@ function usernameExists(username) {
 }
 
 function renderAddPlayer() {
-
+    addCountriesToDropdown();
     const teamSelect = document.getElementById("teamSelect")
 
     teamSelect.innerHTML = `
@@ -194,5 +194,30 @@ function searchPlayer() {
         goToPlayer(searchedPlayer.username);
     } else {
         alert ("No player found");
+    }
+}
+
+async function getCountries() {
+    try {
+        const response = await fetch('https://restcountries.com/v3.1/region/europe');
+        const data = await response.json();
+
+        return data.map(country => country.name.common).sort();
+    } catch (err) {
+        console.error('Could not fetch country:', err);
+        alert("Couldn't fetch countries")
+        return [];
+    }
+}
+
+async function addCountriesToDropdown() {
+    const countriesDropdown = document.getElementById('country');
+
+    const countries = await getCountries();
+
+    for (let i = 0; i < countries.length; i++) {
+        const countryElement = document.createElement('option');
+        countryElement.textContent = countries[i];
+        countriesDropdown.appendChild(countryElement);
     }
 }
