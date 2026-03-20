@@ -47,6 +47,8 @@ function renderHome() {
         li.innerHTML = `
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+            
+            <span>${p.flag}</span>
 
             <button onclick="removePlayer('A','${p.username}')">Remove</button>
 
@@ -93,8 +95,9 @@ function usernameExists(username) {
     return teamA.some(p => p.username === username) ||  teamB.some(p => p.username === username)
 }
 
-function renderAddPlayer() {
-    addCountriesToDropdown();
+async function renderAddPlayer() {
+    await addCountriesToDropdown();
+
     const teamSelect = document.getElementById("teamSelect")
 
     teamSelect.innerHTML = `
@@ -110,16 +113,17 @@ function renderAddPlayer() {
     `
 
     document.getElementById("playerForm").addEventListener("submit", e => {
+        e.preventDefault()
         if (teamA.length === 5 || teamB.length === 5) {
             alert("Your team is already full");
         }
 
-        e.preventDefault()
         const username = document.getElementById("username").value
         if (usernameExists(username)) {
             document.getElementById("error").textContent = "Username already exists"
             // return;
         }
+
         const player = {
             username,
             firstname: document.getElementById("firstname").value,
@@ -157,7 +161,7 @@ function renderPlayerInfo() {
             <h2>${player?.username}</h2>
             <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
             <p><b>Age:</b> ${player?.age}</p>
-            <p><b>Country:</b> ${player?.country}</p>
+            <p><b>Country:</b> ${player?.flag} ${player?.country}</p>
             <p><b>Ranking:</b> ${player?.ranking}</p>
             <br>
             <button onclick="window.location='index.html'">
@@ -221,6 +225,7 @@ async function addCountriesToDropdown() {
         countryElement.textContent = countries[i].flag + ' ' + countries[i].name;
         countryElement.dataset.name = countries[i].name;
         countryElement.dataset.flag = countries[i].flag;
+        console.log(countries[i].flag);
         countriesDropdown.appendChild(countryElement);
     }
 }
