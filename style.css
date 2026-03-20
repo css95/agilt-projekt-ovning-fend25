@@ -62,9 +62,11 @@ h2 {
     padding: 0 16 px;
     }
 
+
 .rename {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 input,
@@ -159,10 +161,6 @@ button:active {
 /*tablet iPad Pro*/
 @media (min-width: 1024px) {
 
-    body {
-        background-image: none;
-        background-color: pink;
-    }
 
     .teams {
         flex-direction: row;
@@ -174,4 +172,12 @@ button:active {
         width: 100px;
         height: 30px;
 
+}
+
+button:hover {
+    background-color:#3b83ee;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
 }
