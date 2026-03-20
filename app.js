@@ -63,6 +63,8 @@ function renderHome() {
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
 
+            <span>${p.flag}</span>
+
             <button onclick="removePlayer('B','${p.username}')">Remove</button>
 
             <button onclick="changeTeam('B','${index}')">Change Team</button>
