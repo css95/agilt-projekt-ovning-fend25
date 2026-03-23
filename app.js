@@ -47,6 +47,8 @@ function renderHome() {
         li.innerHTML = `
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+            
+            <span>${p.flag}</span>
 
             <button onclick="removePlayer('A','${p.username}')">Remove</button>
 
@@ -60,6 +62,8 @@ function renderHome() {
         li.innerHTML = `
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+
+            <span>${p.flag}</span>
 
             <button onclick="removePlayer('B','${p.username}')">Remove</button>
 
@@ -93,8 +97,9 @@ function usernameExists(username) {
     return teamA.some(p => p.username === username) ||  teamB.some(p => p.username === username)
 }
 
-function renderAddPlayer() {
-    addCountriesToDropdown();
+async function renderAddPlayer() {
+    await addCountriesToDropdown();
+
     const teamSelect = document.getElementById("teamSelect")
 
     teamSelect.innerHTML = `
@@ -110,25 +115,27 @@ function renderAddPlayer() {
     `
 
     document.getElementById("playerForm").addEventListener("submit", e => {
+        e.preventDefault()
         if (teamA.length === 5 || teamB.length === 5) {
             alert("Your team is already full");
         }
 
-        e.preventDefault()
         const username = document.getElementById("username").value
         if (usernameExists(username)) {
             document.getElementById("error").textContent = "Username already exists"
             // return;
         }
+
         const player = {
             username,
             firstname: document.getElementById("firstname").value,
             lastname: document.getElementById("lastname").value,
             age: document.getElementById("age").value,
-            country: document.getElementById("country").value,
+            country: document.getElementById("country").selectedOptions[0].dataset.name,
+            flag: document.getElementById("country").selectedOptions[0].dataset.flag,
             ranking: document.getElementById("ranking").value
-
         }
+
         const team = document.getElementById("teamSelect").value
         if (team === "A") {
             teamA.push(player)
@@ -156,7 +163,7 @@ function renderPlayerInfo() {
             <h2>${player?.username}</h2>
             <p><b>Name:</b> ${player?.firstname} ${player?.lastname}</p>
             <p><b>Age:</b> ${player?.age}</p>
-            <p><b>Country:</b> ${player?.country}</p>
+            <p><b>Country:</b> ${player?.flag} ${player?.country}</p>
             <p><b>Ranking:</b> ${player?.ranking}</p>
             <br>
             <button onclick="window.location='index.html'">
@@ -202,7 +209,7 @@ async function getCountries() {
         const response = await fetch('https://restcountries.com/v3.1/region/europe');
         const data = await response.json();
 
-        return data.map(country => country.name.common).sort();
+        return data.map(country => ({name: country.name.common, flag: country.flag})).sort(function(a, b){return a.name.localeCompare(b.name)});
     } catch (err) {
         console.error('Could not fetch country:', err);
         alert("Couldn't fetch countries")
@@ -217,7 +224,10 @@ async function addCountriesToDropdown() {
 
     for (let i = 0; i < countries.length; i++) {
         const countryElement = document.createElement('option');
-        countryElement.textContent = countries[i];
+        countryElement.textContent = countries[i].flag + ' ' + countries[i].name;
+        countryElement.dataset.name = countries[i].name;
+        countryElement.dataset.flag = countries[i].flag;
+        console.log(countries[i].flag);
         countriesDropdown.appendChild(countryElement);
     }
 }
