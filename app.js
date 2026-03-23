@@ -35,8 +35,10 @@ function renameTeam(team) {
 
 
 function renderHome() {
-    document.getElementById("teamAName").textContent = teamAName
-    document.getElementById("teamBName").textContent = teamBName
+    document.getElementById("teamAName").textContent = teamAName;
+    document.getElementById("teamBName").textContent = teamBName;
+    document.getElementById("teamACount").textContent = teamA.length + " players";
+    document.getElementById("teamBCount").textContent = teamB.length + " players";
     const listA = document.getElementById("teamAList")
     const listB = document.getElementById("teamBList")
     listA.innerHTML = ""
