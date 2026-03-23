@@ -108,14 +108,13 @@ input, select {
     background: #020617;
     color: whitesmoke;
     width: 100%;
-    max-width: 300px;
     padding: 12px 14px;
     border-radius: 10px;
     margin: 5px;
     outline: none;
     transition: all 0.2s ease;
     box-sizing: border-box;
-    height: 44px;
+    font-size: 1.2rem;
  }
 
 .form {
@@ -185,15 +184,17 @@ button:active {
 }
 
 @media (min-width: 768px) {
-    body {
-        font-size: 24px;
-    }
+
 }
 
 @media (min-width: 1024px) {
     body {
-        font-size: 32px;
         margin: 0 auto;
+
+        .teams{
+            flex-direction: row;
+            justify-content: center;
+        }
 
         form {
             max-width: 1200px;
