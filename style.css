@@ -11,10 +11,12 @@ body {
     margin: 0;
     background-image: linear-gradient(to bottom, #4962da, #5663d3, #6165cb, #6966c4, #6f68bd, #8165b8, #9162b2, #9e60ab, #b8579d, #cd4e89, #da4a70, #e04e55);
     height: 100vh;
+    font-size: 16px;
 }
 
 
 nav {
+    position: relative;
     padding: 1rem 5%;
     background-color: #051252;
     border-bottom: 1px solid #020617;
@@ -59,6 +61,8 @@ H1 {
 .team {
     display: flex;
     flex-direction: column;
+    background-color: #6966c4;
+    border-radius: 8px;
     width: 600px;
     border: 2px solid black;
     flex-wrap: wrap;
@@ -116,6 +120,10 @@ input, select {
 .form {
     max-width: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     }
 
 #playerForm {
@@ -126,6 +134,7 @@ input, select {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 
 }
 
@@ -177,4 +186,23 @@ button:active {
 
 }
 
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+}
 
+@media (min-width: 1024px) {
+    body {
+        font-size: 20px;
+        margin: 0 auto;
+
+        form {
+            max-width: 1200px;
+
+        }
+
+
+
+    }
+}
