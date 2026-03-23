@@ -104,11 +104,11 @@ async function renderAddPlayer() {
 
     teamSelect.innerHTML = `
 
-        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        <option value="A" ${teamA.length >= 7 ? "disabled" : ""}>
         ${teamAName}
         </option>
 
-        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        <option value="B" ${teamB.length >= 7 ? "disabled" : ""}>
         ${teamBName}
         </option>
 
@@ -116,7 +116,7 @@ async function renderAddPlayer() {
 
     document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
-        if (teamA.length === 5 || teamB.length === 5) {
+        if (teamA.length === 7 || teamB.length === 7) {
             alert("Your team is already full");
         }
 
@@ -175,14 +175,14 @@ function renderPlayerInfo() {
 
 function changeTeam(team, index) {
     if (team === "A") {
-        if (teamB.length >= 5) {
+        if (teamB.length >= 7) {
             alert("Team B is full")
             return
         }
         const player = teamA.splice(parseInt(index), 1)[0]
         teamB.push(player)
     } else {
-        if (teamA.length >= 5) {
+        if (teamA.length >= 7) {
             alert("Team A is full")
             return
         }
