@@ -17,7 +17,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1.875rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -29,13 +29,9 @@ body {
 
 
 nav {
-    position: relative;
     padding: 1rem 5%;
     background-color: #051252;
     border-bottom: 1px solid #020617;
-    backdrop-filter: blur(15px);
-    
- 
 }
 
  nav a {
@@ -118,7 +114,7 @@ input, select {
  }
 
  #search {
-    width: 50%;
+    max-width: 15rem;
  }
 
 .form {
@@ -168,8 +164,11 @@ input, select {
 }
 
 button {
-    max-width: 200px;
-    height: 44px;
+    width: 100%;
+    max-width: 15rem;
+    min-height: 1.3rem;
+    font-size: 1rem;
+    padding: 0.4rem;
     background-color: #5C9CFA;
     color: white;
     border: none;
@@ -178,6 +177,10 @@ button {
     box-shadow: 0 4px 0 #3b83ee, 0 4px 2px rgba(0,0,0,0.15);
     transition: all 0.15s ease;
     margin: 5px;
+}
+
+#search-btn {
+    width: 10rem;
 }
 
 button:active {
@@ -195,17 +198,28 @@ button:active {
     body {
         margin: 0 auto;
 
+        h2 {
+        font-size: 1,2rem;
+        text-align: center;
+        }
+           
+
         .teams{
             flex-direction: row;
             justify-content: center;
+
         }
 
         form {
             max-width: 1200px;
-
         }
+                input, select {
+                    font-size: 0.6rem;
+                    padding: 0.4rem;  
+                }
 
-
-
+        button {
+            font-size: 0.6rem;
+        }
     }
 }
