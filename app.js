@@ -268,6 +268,7 @@ function changeTeam(team, index) {
         const player = teamB.splice(parseInt(index), 1)[0]
         teamA.push(player)
     }
+    save()
     renderHome()
 }
 
