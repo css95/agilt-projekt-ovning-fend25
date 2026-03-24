@@ -35,12 +35,28 @@ function renameTeam(team) {
 
 
 function renderHome() {
-    document.getElementById("teamAName").textContent = teamAName
-    document.getElementById("teamBName").textContent = teamBName
+    document.getElementById("teamAName").textContent = teamAName;
+    document.getElementById("teamBName").textContent = teamBName;
+
+    const teamACount = document.getElementById("teamACount");
+    const teamBCount = document.getElementById("teamBCount");
+    teamACount.textContent = teamA.length + " players";
+    teamBCount.textContent = teamB.length + " players";
+
+
     const listA = document.getElementById("teamAList")
     const listB = document.getElementById("teamBList")
     listA.innerHTML = ""
     listB.innerHTML = ""
+
+    if (teamA.length < 3) {
+        teamACount.innerHTML = `<p>Minimum 3 players per team required!</p>`
+    }
+
+    if (teamB.length < 3) {
+        teamBCount.innerHTML = `<p>Minimum 3 players per team required!</p>`
+    }
+
     teamA.forEach((p, index) => {
         const li = document.createElement("li")
         li.className = "player"
@@ -104,11 +120,11 @@ async function renderAddPlayer() {
 
     teamSelect.innerHTML = `
 
-        <option value="A" ${teamA.length >= 5 ? "disabled" : ""}>
+        <option value="A" ${teamA.length >= 7 ? "disabled" : ""}>
         ${teamAName}
         </option>
 
-        <option value="B" ${teamB.length >= 5 ? "disabled" : ""}>
+        <option value="B" ${teamB.length >= 7 ? "disabled" : ""}>
         ${teamBName}
         </option>
 
@@ -116,14 +132,23 @@ async function renderAddPlayer() {
 
     document.getElementById("playerForm").addEventListener("submit", e => {
         e.preventDefault()
-        if (teamA.length === 5 || teamB.length === 5) {
-            alert("Your team is already full");
+
+        const team = document.getElementById("teamSelect").value
+
+        if (team === "A" && teamA.length >= 7) {
+            alert("Team A is already full");
+            return;
+        }
+
+        if (team === "B" && teamB.length >= 7) {
+            alert("Team B is already full");
+            return;
         }
 
         const username = document.getElementById("username").value
         if (usernameExists(username)) {
             document.getElementById("error").textContent = "Username already exists"
-            // return;
+            return;
         }
 
         const player = {
@@ -136,7 +161,6 @@ async function renderAddPlayer() {
             ranking: document.getElementById("ranking").value
         }
 
-        const team = document.getElementById("teamSelect").value
         if (team === "A") {
             teamA.push(player)
         }
@@ -175,14 +199,14 @@ function renderPlayerInfo() {
 
 function changeTeam(team, index) {
     if (team === "A") {
-        if (teamB.length >= 5) {
+        if (teamB.length >= 7) {
             alert("Team B is full")
             return
         }
         const player = teamA.splice(parseInt(index), 1)[0]
         teamB.push(player)
     } else {
-        if (teamA.length >= 5) {
+        if (teamA.length >= 7) {
             alert("Team A is full")
             return
         }
