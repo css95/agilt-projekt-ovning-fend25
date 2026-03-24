@@ -63,6 +63,8 @@ function renderHome() {
         li.innerHTML = `
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+
+            <button onclick="editPlayer('${p.username}')">Edit</button>
             
             <span>${p.flag}</span>
 
@@ -78,6 +80,8 @@ function renderHome() {
         li.innerHTML = `
 
             <span onclick="goToPlayer('${p.username}')">${p.username}</span>
+
+            <button onclick="editPlayer('${p.username}')">Edit</button>
 
             <span>${p.flag}</span>
 
@@ -114,6 +118,9 @@ function usernameExists(username) {
 }
 
 async function renderAddPlayer() {
+
+    localStorage.removeItem("editPlayer") 
+
     await addCountriesToDropdown();
 
     const teamSelect = document.getElementById("teamSelect")
@@ -195,6 +202,54 @@ function renderPlayerInfo() {
             </button>
         </div>
     `;
+}
+
+async function renderEditPlayer() {
+    await addCountriesToDropdown()
+
+    const username = localStorage.getItem("editPlayer")
+    const player = teamA.find(p => p.username === username) || teamB.find(p => p.username === username)
+
+    if (!player) {
+        window.location.href = "index.html"
+        return
+    }
+
+    document.getElementById("username").value = player.username
+    document.getElementById("firstname").value = player.firstname
+    document.getElementById("lastname").value = player.lastname
+    document.getElementById("age").value = player.age
+    document.getElementById("ranking").value = player.ranking
+    document.getElementById("teamSelect").style.display = "none"
+
+    document.getElementById("playerForm").addEventListener("submit", e => {
+        e.preventDefault()
+
+        const updatedPlayer = {
+            username: document.getElementById("username").value,
+            firstname: document.getElementById("firstname").value,
+            lastname: document.getElementById("lastname").value,
+            age: document.getElementById("age").value,
+            country: document.getElementById("country").selectedOptions[0].dataset.name,
+            flag: document.getElementById("country").selectedOptions[0].dataset.flag,
+            ranking: document.getElementById("ranking").value
+        }
+
+        const indexA = teamA.findIndex(p => p.username === username)
+        const indexB = teamB.findIndex(p => p.username === username)
+
+        if (indexA !== -1) teamA[indexA] = updatedPlayer
+        if (indexB !== -1) teamB[indexB] = updatedPlayer
+
+        localStorage.removeItem("editPlayer")
+        save()
+        window.location.href = "index.html"
+    })
+}
+
+function editPlayer(username) {
+    localStorage.setItem("editPlayer", username)
+    window.location.href = "addplayer.html"
 }
 
 function changeTeam(team, index) {

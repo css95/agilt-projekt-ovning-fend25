@@ -36,7 +36,11 @@
     <p id="error"></p>
     
     <script>
-        renderAddPlayer()
+        if (localStorage.getItem("editPlayer")) {
+            renderEditPlayer()
+        } else {
+            renderAddPlayer()
+        }
     </script>
 
 </body>
