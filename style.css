@@ -7,103 +7,219 @@
 }
 
 html {
-    background-image: linear-gradient(to bottom, #4962da, #5663d3, #6165cb, #6966c4, #6f68bd, #8165b8, #9162b2, #9e60ab, #b8579d, #cd4e89, #da4a70, #e04e55);
+    font-size: 24px; /* Set the root font size */
 }
 
+h1 {
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+}
 
 body {
     margin: 0;
+    background-image: linear-gradient(to bottom, #4962da, #5663d3, #6165cb, #6966c4, #6f68bd, #8165b8, #9162b2, #9e60ab, #b8579d, #cd4e89, #da4a70, #e04e55);
     height: 100vh;
 }
 
+
 nav {
+    padding: 1rem 5%;
     background-color: #051252;
-    padding: 25px;
+    border-bottom: 1px solid #020617;
 }
 
-nav a {
-    margin: 40px;
+ nav a {
     color: white;
     text-decoration: none;
-}
+    padding: 10px 12px;
+    border-radius: 8px;
+    }
 
-nav a:hover {
+nav a:active {
     background-color:#e04e55;
-    padding: 10px;
-    border-radius: 50%;
-}
 
-H1 {
-    color: white;
-    text-align: center;
-    font-size: 64px;
-}
+    }
 
 
-.teams, .rename {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 20px;
-}
-
-.form {
-    display: flex;
-    justify-content: center;
-}
-
-#playerForm {
+.teams {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 5px;
     margin-top: 20px;
-    width: 399px;
-}
+    padding: 0 16px;
+    }
 
 .team {
-    padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    background-color: #051252;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: #6966c4;
+    border-radius: 8px;
+    width: 600px;
+    border: 2px solid black;
+    flex-wrap: wrap;
+
 }
+
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+span {
+    background: #020617;
+    color: whitesmoke;
+    border-radius: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    margin: 5px;
+  
+}
+
+
+.rename {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.renameTeam {
+    display: flex;
+    align-items: center;
+}
+
+input, select {
+    background: #020617;
+    color: whitesmoke;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin: 5px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+ }
+
+ #search {
+    max-width: 15rem;
+ }
+
+.form {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    }
+
+#playerForm {
+    background-color: #051252;
+    padding: 40px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+
 
 .player {
     display: flex;
     justify-content: space-between;
     margin: 6px 0;
-
 }
 
-.player span {
-    cursor: pointer;
-    color: white;
-}
 
 .profile {
-    background: white;
+    background-color: #051252;
+    color: whitesmoke;
+    font-weight: 500;
+    max-width: 400px;
     padding: 30px;
-    border-radius: 10px;
-    width: 300px;
+    margin: 20px auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+}
+
+.profile h2 {
+    margin-bottom: 10px;
 }
 
 button {
+    width: 100%;
+    max-width: 15rem;
+    min-height: 1.3rem;
+    font-size: 1rem;
+    padding: 0.4rem;
     background-color: #5C9CFA;
     color: white;
-    width: 100px;
-    height: 30px;
-    margin-left: 5px;
     border: none;
     border-radius: 5px;
+    font-weight: 700;
+    box-shadow: 0 4px 0 #3b83ee, 0 4px 2px rgba(0,0,0,0.15);
+    transition: all 0.15s ease;
+    margin: 5px;
 }
 
-
-span {
-    margin-top: 5px;
+#search-btn {
+    width: 10rem;
 }
 
-button:hover {
-    background-color:#e04e55;
+button:active {
+    background-color:#3b83ee;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     cursor: pointer;
 
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 1024px) {
+    body {
+        margin: 0 auto;
+
+        h2 {
+        font-size: 1,2rem;
+        text-align: center;
+        }
+           
+
+        .teams{
+            flex-direction: row;
+            justify-content: center;
+
+        }
+
+        form {
+            max-width: 1200px;
+        }
+                input, select {
+                    font-size: 0.6rem;
+                    padding: 0.4rem;  
+                }
+
+        button {
+            font-size: 0.6rem;
+        }
+    }
 }

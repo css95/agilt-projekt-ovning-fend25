@@ -8,17 +8,20 @@
 </head>
 <body>
     <nav>
+        <h1>Add Player</h1>
         <a href="index.html">Home</a>
         <a href="addplayer.html">Add Player</a>
     </nav>
-    <h1>Add Player</h1>
+    <h2>Please fill in...</h2>
     <div class="form">
         <form id="playerForm">
             <input id="username" placeholder="Username" required>
             <input id="firstname" placeholder="First name" required>
             <input id="lastname" placeholder="Last name" required>
             <input id="age" type="number" placeholder="Age" required>
-            <input id="country" placeholder="Country" required>
+            <select id="country" required>
+                <option value="">Country</option>
+            </select>
             <select id="ranking">
                 <option>Iron</option>
                 <option>Bronze</option>
@@ -26,16 +29,18 @@
                 <option>Gold</option>
                 <option>Diamond</option>
             </select>
-            <br><br>
             <select id="teamSelect"></select>
-            <br><br>
             <button>Add Player</button>
         </form>
     </div>
     <p id="error"></p>
     
     <script>
-        renderAddPlayer()
+        if (localStorage.getItem("editPlayer")) {
+            renderEditPlayer()
+        } else {
+            renderAddPlayer()
+        }
     </script>
 
 </body>

@@ -14,21 +14,25 @@
 <body>
 
     <nav>
+        <h1>The E-sports Tournament</h1>
         <a href="index.html">Home</a>
         <a href="addplayer.html">Add Player</a>
         <input id="search" placeholder="Search player">
         <button id="search-btn" onclick="searchPlayer()">Search</button>
+        
     </nav>
 
-    <h1>The E-sports Tournament</h1>
+  
 
     <div class="rename">
-
-        <input id="teamAInput" placeholder="Rename Team A">
-        <button onclick="renameTeam('A')">Rename</button>
-
-        <input id="teamBInput" placeholder="Rename Team B">
-        <button onclick="renameTeam('B')">Rename</button>
+        <div class="renameTeam">
+            <input id="teamAInput" placeholder="Rename Team A">
+            <button onclick="renameTeam('A')">Rename</button>
+        </div>
+        <div class="renameTeam">
+            <input id="teamBInput" placeholder="Rename Team B">
+            <button onclick="renameTeam('B')">Rename</button>
+        </div>
 
     </div>
 
@@ -36,11 +40,13 @@
 
         <div class="team">
             <h2 id="teamAName"></h2>
+            <p id="teamACount"></p>
             <ul id="teamAList"></ul>
         </div>
 
         <div class="team">
             <h2 id="teamBName"></h2>
+            <p id="teamBCount"></p>
             <ul id="teamBList"></ul>
         </div>
 
